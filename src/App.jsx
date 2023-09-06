@@ -1,65 +1,101 @@
 import { useState } from "react";
 
 const App = () => {
-  const [firstNum, setFirstNum] = useState("0");
-  const [secondNum, setSecondNum] = useState("0");
+  const [currentNum, setCurrentNum] = useState("0");
+  const [secondNum, setSecondNum] = useState("");
   const [operator, setOperator] = useState("");
+  const [result, setResult] = useState("");
 
   const handleClick = (event) => {
-    if (firstNum.length < 8) {
-      setFirstNum((prevfirstNum) =>
-        prevfirstNum === "0"
-          ? event.target.textContent
-          : prevfirstNum + event.target.textContent
-      );
+    if (result) {
+      handleDelete();
+      return;
+    }
+    if (currentNum.length < 8) {
+      if (operator) {
+        setSecondNum((prevNum) =>
+          prevNum === "0"
+            ? event.target.textContent
+            : prevNum + event.target.textContent
+        );
+      } else {
+        setCurrentNum((prevNum) =>
+          prevNum === "0"
+            ? event.target.textContent
+            : prevNum + event.target.textContent
+        );
+      }
     }
   };
 
   const handleOperator = (event) => {
+    if (result) {
+      handleDelete();
+      return;
+    }
     setOperator(event.target.textContent);
-    setSecondNum(firstNum);
-    setFirstNum("0");
   };
 
   const handleResult = () => {
     switch (operator) {
       case "+":
-        setFirstNum(parseFloat(secondNum) + parseFloat(firstNum));
+        result
+          ? setResult(result + parseFloat(secondNum))
+          : setResult(parseFloat(currentNum) + parseFloat(secondNum));
         break;
       case "-":
-        setFirstNum(parseFloat(secondNum) - parseFloat(firstNum));
+        result
+          ? setResult(result - parseFloat(secondNum))
+          : setResult(parseFloat(currentNum) - parseFloat(secondNum));
         break;
       case "×":
-        setFirstNum(parseFloat(secondNum) * parseFloat(firstNum));
+        result
+          ? setResult(result * parseFloat(secondNum))
+          : setResult(parseFloat(currentNum) * parseFloat(secondNum));
         break;
       case "÷":
-        setFirstNum(parseFloat(secondNum) / parseFloat(firstNum));
+        result
+          ? setResult(result / parseFloat(secondNum))
+          : setResult(parseFloat(currentNum) / parseFloat(secondNum));
         break;
     }
   };
 
   const handleDelete = () => {
-    setFirstNum(`0`);
+    setCurrentNum("0");
+    setSecondNum("");
+    setOperator("");
+    setResult("");
   };
 
   const handleSign = () => {
-    setFirstNum(-firstNum);
+    if (result) {
+      setResult(-result);
+    } else if (secondNum) {
+      setSecondNum(-secondNum);
+    } else setCurrentNum(-currentNum);
   };
 
   const handlePercent = () => {
-    setFirstNum(firstNum / 100);
+    if (result) {
+      setResult((result / 100).toString());
+    } else if (secondNum) {
+      setSecondNum((secondNum / 100).toString());
+    } else setCurrentNum((currentNum / 100).toString());
   };
 
   const handleDecimal = () => {
-    if (!firstNum.includes(".")) {
-      setFirstNum(firstNum + ".");
-    }
+    if (secondNum) {
+      !secondNum.includes(".") ? setSecondNum(secondNum + ".") : null;
+    } else !currentNum.includes(".") ? setCurrentNum(currentNum + ".") : null;
   };
 
   return (
     <main>
       <div className="calculator">
-        <div className="screen">{firstNum}</div>
+        <div className="screen">
+          {result ? result : secondNum ? secondNum : currentNum}
+        </div>
         <button onClick={handleDelete} className="top">
           AC
         </button>
