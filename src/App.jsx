@@ -114,28 +114,48 @@ const App = () => {
         <button onClick={handleOperator} className="operator">
           ÷
         </button>
-        <button onClick={handleClick}>7</button>
-        <button onClick={handleClick}>8</button>
-        <button onClick={handleClick}>9</button>
+        <button onClick={handleClick} className="number">
+          7
+        </button>
+        <button onClick={handleClick} className="number">
+          8
+        </button>
+        <button onClick={handleClick} className="number">
+          9
+        </button>
         <button onClick={handleOperator} className="operator">
           ×
         </button>
-        <button onClick={handleClick}>4</button>
-        <button onClick={handleClick}>5</button>
-        <button onClick={handleClick}>6</button>
+        <button onClick={handleClick} className="number">
+          4
+        </button>
+        <button onClick={handleClick} className="number">
+          5
+        </button>
+        <button onClick={handleClick} className="number">
+          6
+        </button>
         <button onClick={handleOperator} className="operator">
           -
         </button>
-        <button onClick={handleClick}>1</button>
-        <button onClick={handleClick}>2</button>
-        <button onClick={handleClick}>3</button>
+        <button onClick={handleClick} className="number">
+          1
+        </button>
+        <button onClick={handleClick} className="number">
+          2
+        </button>
+        <button onClick={handleClick} className="number">
+          3
+        </button>
         <button onClick={handleOperator} className="operator">
           +
         </button>
-        <button onClick={handleClick} className="zero">
+        <button onClick={handleClick} className="number zero">
           0
         </button>
-        <button onClick={handleDecimal}>.</button>
+        <button onClick={handleDecimal} className="number">
+          .
+        </button>
         <button onClick={handleResult} className="operator">
           =
         </button>
