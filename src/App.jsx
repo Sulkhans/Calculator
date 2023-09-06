@@ -94,7 +94,13 @@ const App = () => {
     <main>
       <div className="calculator">
         <div className="screen">
-          {result ? result : secondNum ? secondNum : currentNum}
+          {result
+            ? result.toString().length > 8
+              ? "Error"
+              : result
+            : secondNum
+            ? secondNum
+            : currentNum}
         </div>
         <button onClick={handleDelete} className="top">
           AC
