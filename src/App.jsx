@@ -5,30 +5,45 @@ const App = () => {
   const [secondNum, setSecondNum] = useState("");
   const [operator, setOperator] = useState("");
   const [result, setResult] = useState("");
+  const [tracker, setTracker] = useState(false);
 
   const handleClick = (event) => {
-    if (result) {
+    if (tracker) {
       handleDelete();
+      setTracker(false);
       return;
     }
-    if (currentNum.length < 8) {
-      if (operator) {
-        setSecondNum((prevNum) =>
-          prevNum === "0"
-            ? event.target.textContent
-            : prevNum + event.target.textContent
-        );
-      } else {
-        setCurrentNum((prevNum) =>
-          prevNum === "0"
-            ? event.target.textContent
-            : prevNum + event.target.textContent
-        );
-      }
+    if (
+      (currentNum || currentNum === 0) &&
+      secondNum &&
+      (result || result === 0) &&
+      operator
+    ) {
+      setCurrentNum(result);
+      setSecondNum("");
+      setResult("");
+    }
+    if (operator) {
+      setSecondNum((prevNum) =>
+        prevNum === "0"
+          ? event.target.textContent
+          : prevNum + event.target.textContent
+      );
+    } else {
+      setCurrentNum((prevNum) =>
+        prevNum === "0"
+          ? event.target.textContent
+          : prevNum + event.target.textContent
+      );
     }
   };
 
   const handleOperator = (event) => {
+    if (operator) {
+      setOperator(event.target.textContent);
+      handleResult(event);
+      return;
+    }
     if (result) {
       handleDelete();
       return;
@@ -36,7 +51,10 @@ const App = () => {
     setOperator(event.target.textContent);
   };
 
-  const handleResult = () => {
+  const handleResult = (event) => {
+    if (event.target.textContent === "=") {
+      setTracker(true);
+    }
     switch (operator) {
       case "+":
         result
@@ -94,13 +112,7 @@ const App = () => {
     <main>
       <div className="calculator">
         <div className="screen">
-          {result
-            ? result.toString().length > 8
-              ? "Error"
-              : result
-            : secondNum
-            ? secondNum
-            : currentNum}
+          {result || result === 0 ? result : secondNum ? secondNum : currentNum}
         </div>
         <button onClick={handleDelete} className="top">
           AC
