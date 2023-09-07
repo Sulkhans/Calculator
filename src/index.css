@@ -7,7 +7,7 @@
 body {
   font-family: "Poppins", sans-serif;
   color: #ffffff;
-  background-color: #d4d4d2;
+  background-color: #cbcbcb;
 }
 
 main {
@@ -21,7 +21,7 @@ main {
   display: grid;
   grid-template: 100px repeat(5, 65px) / repeat(4, 65px);
   gap: 10px;
-  background-color: #1c1c1c;
+  background-color: #000000;
   padding: 25px 20px;
   border-radius: 35px;
 }
@@ -41,7 +41,8 @@ button {
   border: none;
   border-radius: 50%;
   color: #ffffff;
-  background-color: #505050;
+  background-color: #323232;
+  outline: none;
 }
 
 .number:focus {
@@ -49,17 +50,18 @@ button {
 }
 
 .operator {
-  background-color: #ff9500;
+  background-color: #fe9e15;
+  font-size: 26px;
 }
 
 .operator:focus {
   background-color: #ffffff;
-  color: #ff9500;
+  color: #fe9e15;
   transition: background-color 0.3s ease-out, color 0.3s ease-out;
 }
 
 .top {
-  background-color: #d4d4d2;
+  background-color: #a5a5a5;
   color: #1c1c1c;
 }
 
@@ -75,25 +77,25 @@ button {
 
 @keyframes numberColor {
   0% {
-    background-color: #505050;
+    background-color: #323232;
   }
   50% {
-    background-color: #868686;
+    background-color: #727272;
   }
   100% {
-    background-color: #505050;
+    background-color: #323232;
   }
 }
 
 @keyframes topColor {
   0% {
-    background-color: #d4d4d2;
+    background-color: #a5a5a5;
   }
   50% {
-    background-color: #e9e9e9;
+    background-color: #d8d8d8;
   }
   100% {
-    background-color: #d4d4d2;
+    background-color: #a5a5a5;
   }
 }
 
@@ -107,6 +109,9 @@ button {
   }
   button {
     font-size: 20px;
+  }
+  .operator {
+    font-size: 22px;
   }
 }
 
@@ -122,5 +127,8 @@ button {
   }
   button {
     font-size: 48px;
+  }
+  .operator {
+    font-size: 50px;
   }
 }
