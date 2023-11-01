@@ -5,14 +5,8 @@ const App = () => {
   const [secondNum, setSecondNum] = useState("");
   const [operator, setOperator] = useState("");
   const [result, setResult] = useState("");
-  const [tracker, setTracker] = useState(false);
 
   const handleClick = (event) => {
-    if (tracker) {
-      handleDelete();
-      setTracker(false);
-      return;
-    }
     if (
       (currentNum || currentNum === 0) &&
       secondNum &&
@@ -51,30 +45,21 @@ const App = () => {
     setOperator(event.target.textContent);
   };
 
-  const handleResult = (event) => {
-    if (event.target.textContent === "=") {
-      setTracker(true);
-    }
+  const handleResult = () => {
+    const num1 = parseFloat(currentNum);
+    const num2 = parseFloat(secondNum);
     switch (operator) {
       case "+":
-        result
-          ? setResult(result + parseFloat(secondNum))
-          : setResult(parseFloat(currentNum) + parseFloat(secondNum));
+        setResult(num1 + num2);
         break;
       case "-":
-        result
-          ? setResult(result - parseFloat(secondNum))
-          : setResult(parseFloat(currentNum) - parseFloat(secondNum));
+        setResult(num1 - num2);
         break;
       case "×":
-        result
-          ? setResult(result * parseFloat(secondNum))
-          : setResult(parseFloat(currentNum) * parseFloat(secondNum));
+        setResult(num1 * num2);
         break;
       case "÷":
-        result
-          ? setResult(result / parseFloat(secondNum))
-          : setResult(parseFloat(currentNum) / parseFloat(secondNum));
+        setResult(num1 / num2);
         break;
     }
   };
@@ -111,7 +96,17 @@ const App = () => {
   return (
     <main>
       <div className="calculator">
-        <div className="screen">
+        <div
+          className="screen"
+          style={{
+            fontSize:
+              currentNum.length > 6 ||
+              secondNum.length > 6 ||
+              result.toString().length > 6
+                ? "2.5rem"
+                : "3.5rem",
+          }}
+        >
           {result || result === 0 ? result : secondNum ? secondNum : currentNum}
         </div>
         <button onClick={handleDelete} className="top">

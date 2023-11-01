@@ -31,8 +31,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: end;
-  font-size: 54px;
-  margin-right: 15px;
+  margin-right: 0.8rem;
 }
 
 button {
@@ -51,7 +50,8 @@ button {
 
 .operator {
   background-color: #fe9e15;
-  font-size: 26px;
+  font-size: 30px;
+  line-height: 0.5;
 }
 
 .operator:focus {
